@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { addToCart } from "../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
+import { liked } from "../features/liked/likedSlice";
 
 const Info = styled.div`
   opacity: 0;
@@ -68,6 +69,7 @@ const Icon = styled.div`
   &:hover {
     background-color: #e9f5f5;
     transform: scale(1.1);
+    background-color: red;
   }
 `;
 
@@ -97,7 +99,11 @@ const ProductView = (props) => {
           </Link>
         </Icon>
         <Icon>
-          <FavoriteBorderOutlined />
+          <FavoriteBorderOutlined
+            onClick={() => {
+              dispatch(liked(props.item));
+            }}
+          />
         </Icon>
       </Info>
     </Container>

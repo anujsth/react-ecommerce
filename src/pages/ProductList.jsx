@@ -4,6 +4,11 @@ import React from "react";
 // import Navbar from "../components/Navbar";
 // import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
+import { useSelector, useDispatch } from "react-redux";
+import { setType } from "../features/modal/modalSlice";
+
+// import { useState } from "react";
+
 // import Footer from "../components/Footer";
 
 const Container = styled.div``;
@@ -32,6 +37,8 @@ const Select = styled.select`
 const Option = styled.option``;
 
 const ProductList = () => {
+  const { type } = useSelector((store) => store.modal);
+  const dispatch = useDispatch();
   return (
     <Container>
       {/* <Announcement />
@@ -40,36 +47,34 @@ const ProductList = () => {
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
-          <Select>
-            <Option disabled selected>
-              Color
+
+          <Select
+            value={type}
+            onChange={(e) => {
+              dispatch(setType(e.target.value));
+            }}
+          >
+            <Option value=" " disabled>
+              Category
             </Option>
-            <Option>White</Option>
-            <Option>Black</Option>
-            <Option>Red</Option>
-            <Option>Blue</Option>
-            <Option>Yellow</Option>
-            <Option>Green</Option>
-          </Select>
-          <Select>
-            <Option disabled selected>
-              Size
-            </Option>
-            <Option>XS</Option>
-            <Option>S</Option>
-            <Option>M</Option>
-            <Option>L</Option>
-            <Option>XL</Option>
+            <Option value="laptop">Laptop</Option>
+            <Option value="pc">PC</Option>
           </Select>
         </Filter>
-        <Filter>
+        {/* <Filter>
           <FilterText>Sort Products:</FilterText>
-          <Select>
-            <Option selected>Newest</Option>
-            <Option>Price (asc)</Option>
-            <Option>Price (desc)</Option>
+          <Select
+            onChange={(e) => {
+              dispatch(setSort(e.target.value));
+            }}
+          >
+            <Option selected disabled>
+              Based on price
+            </Option>
+            <Option value="asc">Price (asc)</Option>
+            <Option value="des">Price (desc)</Option>
           </Select>
-        </Filter>
+        </Filter> */}
       </FilterContainer>
       <Products />
       {/* <Newsletter /> */}

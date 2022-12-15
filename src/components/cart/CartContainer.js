@@ -1,12 +1,16 @@
 import React from "react";
 import CartItem from "./CartItem";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart } from "../../features/cart/cartSlice";
-import Modal from "./Modal";
+// import { clearCart } from "../../features/cart/cartSlice";
+// import Modal from "./Modal";
 import { openModal } from "../../features/modal/modalSlice";
+import KhaltiCheckout from "khalti-checkout-web";
+import config from "../khalti/khaltiConfig";
+
 // import { openModal } from "../features/modal/modalSlice";
 
 const CartContainer = () => {
+  let checkout = new KhaltiCheckout(config);
   const dispatch = useDispatch();
   const { cartItems, amount, total } = useSelector((store) => store.cart);
   const { isOpen } = useSelector((store) => store.modal);
@@ -40,6 +44,12 @@ const CartContainer = () => {
         </div>
         <button className="btn clear-btn" onClick={() => dispatch(openModal())}>
           clear cart
+        </button>
+        <button
+          className="btn buy-btn"
+          onClick={() => checkout.show({ amount: `${total}00` })}
+        >
+          Buy Now
         </button>
       </footer>
     </section>

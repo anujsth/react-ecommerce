@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { calcTotal } from "./features/cart/cartSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "./components/cart/Modal.js";
+import FavoriteList from "./pages/FavoriteList";
 
 function App() {
   const { isOpen } = useSelector((store) => store.modal);
@@ -35,6 +36,7 @@ function App() {
         <Route path="/productlist" element={<ProductList />}></Route>
 
         <Route path="/cartlist" element={<CartContainer />}></Route>
+        <Route path="/liked" element={<FavoriteList />}></Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Newsletter />

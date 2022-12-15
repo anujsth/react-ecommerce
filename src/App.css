@@ -249,3 +249,15 @@ hr {
   display: flex;
   justify-content: space-around;
 }
+
+.buy-btn {
+  margin-left: 10px;
+  border-radius: 5px;
+  height: 35px;
+  width: 140px;
+}
+
+.buy-btn:hover {
+  color: white;
+  background: red;
+}
